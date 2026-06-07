@@ -186,7 +186,7 @@ ui <- page_fluid(
           )
         ),
         actionButton("run_analysis", "Run analysis", class = "btn btn-primary"),
-        textOutput("status_note", container = tags$p, class = "status-note")
+        div(class = "status-note", textOutput("status_note", container = span))
       )
     ),
     br(),

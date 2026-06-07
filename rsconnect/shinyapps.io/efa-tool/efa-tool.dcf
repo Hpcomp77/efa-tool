@@ -1,0 +1,10 @@
+name: efa-tool
+title:
+username: efa-tool
+account: efa-tool
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17477932
+bundleId: 12094987
+url: https://efa-tool.shinyapps.io/efa-tool/
+version: 1
