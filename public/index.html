@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EFA Studio</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Exploratory Factor Analysis</p>
+          <h1>EFA Studio</h1>
+          <p class="lede">
+            Upload a CSV, drag variables into the analysis set, choose retention,
+            extraction, and rotation, then run R and review the results without
+            leaving the page.
+          </p>
+        </div>
+        <button id="runButton" class="primary">Run analysis</button>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel upload-panel">
+          <div class="panel-header">
+            <h2>1. Data</h2>
+            <span id="fileStatus" class="badge muted">No file loaded</span>
+          </div>
+          <label for="csvFile" class="upload-zone" id="uploadZone">
+            <input id="csvFile" type="file" accept=".csv,text/csv" />
+            <strong>Drop a CSV here</strong>
+            <span>or click to browse</span>
+          </label>
+          <div id="datasetMeta" class="dataset-meta hidden"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>2. Variables</h2>
+            <span id="variableCount" class="badge">0 selected</span>
+          </div>
+          <div class="drag-layout">
+            <div>
+              <h3>Available variables</h3>
+              <div id="availableVariables" class="drop-list"></div>
+            </div>
+            <div>
+              <h3>Selected for EFA</h3>
+              <div id="selectedVariables" class="drop-list drop-target"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel options-panel">
+          <div class="panel-header">
+            <h2>3. Model Options</h2>
+          </div>
+          <div class="form-grid">
+            <label>
+              Extraction method
+              <select id="extractionMethod">
+                <option value="minres">Minimum residual (minres)</option>
+                <option value="ml">Maximum likelihood (ml)</option>
+                <option value="pa">Principal axis (pa)</option>
+                <option value="uls">Unweighted least squares (uls)</option>
+                <option value="wls">Weighted least squares (wls)</option>
+                <option value="gls">Generalized least squares (gls)</option>
+              </select>
+            </label>
+
+            <label>
+              Factor retention
+              <select id="retentionMethod">
+                <option value="parallel">Parallel analysis</option>
+                <option value="kaiser">Kaiser criterion</option>
+                <option value="fixed">Fixed number of factors</option>
+              </select>
+            </label>
+
+            <label id="factorCountWrap" class="hidden">
+              Number of factors
+              <input id="factorCount" type="number" min="1" value="2" />
+            </label>
+
+            <label>
+              Rotation
+              <select id="rotationMethod">
+                <option value="oblimin">Oblimin</option>
+                <option value="varimax">Varimax</option>
+                <option value="promax">Promax</option>
+                <option value="none">None</option>
+              </select>
+            </label>
+
+            <label>
+              Missing data handling
+              <select id="missingHandling">
+                <option value="pairwise">Pairwise correlations</option>
+                <option value="listwise">Listwise complete cases</option>
+              </select>
+            </label>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel results-panel">
+        <div class="panel-header">
+          <h2>Results</h2>
+          <span id="runStatus" class="badge muted">Idle</span>
+        </div>
+        <div id="errorBox" class="error-box hidden"></div>
+        <div id="results" class="results-grid hidden">
+          <div class="summary-strip">
+            <div class="metric-card">
+              <span>Factors retained</span>
+              <strong id="factorsRetained">-</strong>
+            </div>
+            <div class="metric-card">
+              <span>Observations used</span>
+              <strong id="observationsUsed">-</strong>
+            </div>
+            <div class="metric-card">
+              <span>KMO</span>
+              <strong id="kmoValue">-</strong>
+            </div>
+            <div class="metric-card">
+              <span>Bartlett p-value</span>
+              <strong id="bartlettValue">-</strong>
+            </div>
+          </div>
+
+          <div class="result-block">
+            <h3>Variance explained</h3>
+            <div id="varianceTable"></div>
+          </div>
+
+          <div class="result-block">
+            <h3>Factor loadings</h3>
+            <div id="loadingsTable"></div>
+          </div>
+
+          <div class="result-block">
+            <h3>Communalities and uniqueness</h3>
+            <div id="communalityTable"></div>
+          </div>
+
+          <div class="result-block">
+            <h3>Retention diagnostics</h3>
+            <div id="retentionTable"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

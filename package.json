@@ -1,0 +1,9 @@
+{
+  "name": "efa-online-app",
+  "version": "1.0.0",
+  "description": "Exploratory factor analysis web app powered by R",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
